@@ -38,3 +38,22 @@ btc_data.describe()
 
 #check if there is any null values
 btc_data.isnull().values.any()
+
+#slicing for jan 2020 to dec 2020
+y_2020 = btc_data.loc['2020-01-01':'2020-12-31']
+
+y_2020 = y_2020.drop(['Adj Close', 'Volume'], axis=1)
+
+y_2020.head()
+
+# Grouping by month and calculating the mean of 'Open' and 'Close'
+monthwise = btc_data.groupby(btc_data.index.strftime('%B'))[['Open','Close']].mean()
+
+# Specifying the desired order of months
+new_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August',
+             'September', 'October', 'November', 'December']
+
+# Reindexing the DataFrame to match the desired order
+monthwise = monthwise.reindex(new_order)
+
+monthwise
