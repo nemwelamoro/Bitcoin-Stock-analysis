@@ -101,3 +101,15 @@ fig.add_trace(go.Bar(
 fig.update_layout(barmode='group',
                   title='Monthwise High and Low stock price for 2020')
 fig.show()
+
+
+names = cycle(['Stock Open Price', 'Stock Close Price', 'Stock High Price', 'Stock Low Price'])
+
+fig = px.line(btc_data, x=btc_data.index, y=[btc_data['Open'], btc_data['Close'], btc_data['High'], btc_data['Low']],
+              labels={'Date': 'Date', 'value': 'Stock value'})
+fig.update_layout(title='Stock analysis chart', font_size=15, font_color='black', legend_title='Stock Parameters')
+fig.for_each_trace(lambda t: t.update(name=next(names)))
+fig.update_xaxes(showgrid=False)
+fig.update_yaxes(showgrid=False)
+
+fig.show()
