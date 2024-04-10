@@ -22,3 +22,10 @@ from itertools import cycle
 import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
+
+import yfinance as yf
+
+# Download Bitcoin data
+btc_data = yf.download('BTC-USD', start='2020-01-01', end='2024-04-10')
+
+btc_data.head()
