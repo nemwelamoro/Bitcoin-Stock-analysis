@@ -57,3 +57,47 @@ new_order = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Au
 monthwise = monthwise.reindex(new_order)
 
 monthwise
+
+fig = go.Figure()
+
+fig.add_trace(go.Bar(
+    x=monthwise.index,
+    y=monthwise['Open'],
+    name='Stock Open Price',
+    marker_color='crimson'
+))
+fig.add_trace(go.Bar(
+    x=monthwise.index,
+    y=monthwise['Close'],
+    name='Stock Close Price',
+    marker_color='lightsalmon'
+))
+
+fig.update_layout(barmode='group', xaxis_tickangle=-45,
+                  title='Monthwise comparison between Stock open and close price')
+fig.show()
+
+
+monthvise_low = btc_data.groupby(btc_data.index.strftime('%B'))['Low'].min()
+monthvise_high = btc_data.groupby(btc_data.index.strftime('%B'))['High'].max()
+
+monthvise_low = monthvise_low.reindex(new_order)
+monthvise_high = monthvise_high.reindex(new_order)
+
+fig = go.Figure()
+fig.add_trace(go.Bar(
+    x=monthvise_high.index,
+    y=monthvise_high,
+    name='Stock High Price',
+    marker_color='rgb(0, 153, 204)'
+))
+fig.add_trace(go.Bar(
+    x=monthvise_low.index,
+    y=monthvise_low,
+    name='Stock Low Price',
+    marker_color='rgb(255, 128, 0)'
+))
+
+fig.update_layout(barmode='group',
+                  title='Monthwise High and Low stock price for 2020')
+fig.show()
