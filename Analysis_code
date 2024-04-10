@@ -29,3 +29,12 @@ import yfinance as yf
 btc_data = yf.download('BTC-USD', start='2020-01-01', end='2024-04-10')
 
 btc_data.head()
+
+#see the number of days (rows) and fields available
+btc_data.shape
+
+btc_data.info()
+btc_data.describe()
+
+#check if there is any null values
+btc_data.isnull().values.any()
